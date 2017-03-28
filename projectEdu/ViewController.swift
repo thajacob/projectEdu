@@ -8,18 +8,90 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
 
+    
+    
+    var tempDictionary = chineseDictionaryData
+    
+    var randomKeyVariable: String = ""
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+     
+        
+        
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    
+    func populateRandomChineseCharacter (Dictionary:[String:String]) -> String {
+        
+        let index: Int = Int(arc4random_uniform(UInt32(Dictionary.count)))
+        let randomVal = Array(Dictionary.values)[index]
+        
+        
+        return randomVal
     }
+    
+    func populateRandomEnglishWord (Dictionary:[String:String]) -> String {
+        let index: Int = Int(arc4random_uniform(UInt32(Dictionary.count)))
+        let randomKeys = Array(Dictionary.keys)[index]
+        
+        randomKeyVariable = randomKeys
+        
+        
+        return randomKeys
+        
+    }
+    
+    
+    
+    func equalOrNotEqual(Key: String) -> Bool {
+    
+        for (key, Value) in tempDictionary {
+            if (Value.contains(key))
+            {
+                print("correct answer")
 
+                return true
+                            }
+        }
+        print("wrong answer")
+            return false
+        
+}
+    
+    @IBAction func testButton(_ sender: UIButton) {
+        
+        if equalOrNotEqual(Key:randomKeyVariable) == true {
+            
+            print("correct answer")
+        } else {
+            print("not correct")
+        }
+        
+        
+    }
+    
+    
+    @IBAction func NextButton(_ sender: UIButton) {
+        
+        
+        let chineseCharacter = populateRandomChineseCharacter(Dictionary: tempDictionary)
+        let englishWord = populateRandomEnglishWord(Dictionary: tempDictionary)
+        
+        print("this is chinese character \(chineseCharacter)")
+        print("this is english word \(englishWord)")
+        
+    }
+    
 
+    
+    
+    
+    
+    
 }
 
