@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     var tempDictionary = chineseDictionaryData
     
     var randomKeyVariable: String = ""
+    var randomValueVariable: String = ""
     
     
     override func viewDidLoad() {
@@ -31,6 +32,7 @@ class ViewController: UIViewController {
         let index: Int = Int(arc4random_uniform(UInt32(Dictionary.count)))
         let randomVal = Array(Dictionary.values)[index]
         
+        randomValueVariable = randomVal
         
         return randomVal
     }
@@ -48,10 +50,10 @@ class ViewController: UIViewController {
     
     
     
-    func equalOrNotEqual(Key: String) -> Bool {
+    func equalOrNotEqual(Key: String, Value: String) -> Bool {
     
         for (key, Value) in tempDictionary {
-            if (Value.contains(key))
+            if (key.contains(Value))
             {
                 print("correct answer")
 
@@ -65,7 +67,7 @@ class ViewController: UIViewController {
     
     @IBAction func testButton(_ sender: UIButton) {
         
-        if equalOrNotEqual(Key:randomKeyVariable) == true {
+        if equalOrNotEqual(Key:randomKeyVariable,Value:randomValueVariable ) == true {
             
             print("correct answer")
         } else {
